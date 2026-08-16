@@ -481,6 +481,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 239760043}
+  - component: {fileID: 239760044}
   m_Layer: 5
   m_Name: LifeBar
   m_TagString: Untagged
@@ -509,6 +510,20 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 0}
+--- !u!114 &239760044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239760042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe903d5eeaf8e241845db3f9531929e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthBarUI
+  redFillImage: {fileID: 169153757}
+  playerHealth: {fileID: 988309508}
 --- !u!1 &244363427
 GameObject:
   m_ObjectHideFlags: 0
@@ -12561,6 +12576,7 @@ GameObject:
   - component: {fileID: 479885567}
   - component: {fileID: 479885566}
   - component: {fileID: 479885565}
+  - component: {fileID: 479885570}
   m_Layer: 7
   m_Name: Spyke
   m_TagString: Untagged
@@ -12980,6 +12996,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &479885570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479885563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac7f34243d10484b80906a01a73466c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
+  damageValue: 6
 --- !u!1 &585340346
 GameObject:
   m_ObjectHideFlags: 0
@@ -14924,6 +14953,7 @@ GameObject:
   - component: {fileID: 988309502}
   - component: {fileID: 988309505}
   - component: {fileID: 988309506}
+  - component: {fileID: 988309508}
   - component: {fileID: 988309507}
   m_Layer: 6
   m_Name: Player
@@ -15122,6 +15152,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.2, y: 0.27}
   m_EdgeRadius: 0
+--- !u!114 &988309508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988309501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 327b701e4967d9f429bea234d886e183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 9
+  invincibilityDuration: 1
+  knockbackForce: 5
 --- !u!1 &991025327
 GameObject:
   m_ObjectHideFlags: 0

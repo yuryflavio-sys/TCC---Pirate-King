@@ -75,31 +75,25 @@ public class Player : MonoBehaviour
 
 
     private void CheckGlobalInputs()
-
     {
+        // === A TRAVA DE SEGURANÇA AQUI ===
+        // Se o estado atual for a morte, ignoramos totalmente os botões e saímos do método.
+        if (currentState is PlayerDeadState)
+        {
+            return;
+        }
 
         // Se apertar para pular e estiver no chão, muda para o estado de Pulo
-
         if (Input.GetKeyDown(KeyCode.UpArrow) && IsGrounded() && !(currentState is PlayerAttackState))
-
         {
-
             ChangeState(new PlayerJumpState());
-
         }
-
-
 
         // Se apertar espaço e estiver no chão, inicia o estado de Ataque
-
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded() && !(currentState is PlayerAttackState))
-
         {
-
             ChangeState(new PlayerAttackState());
-
         }
-
     }
 
 
