@@ -22,7 +22,7 @@ public class BigMap : MonoBehaviour
 
             // Inicia a contagem de tempo antes de congelar (ex: espera 1.5 segundos)
             // Ajuste esse valor para o tempo exato que suas animações demoram para terminar
-            StartCoroutine(FreezeGameRoutine(2.0f)); 
+            StartCoroutine(FreezeGameRoutine(1.5f)); 
         }
     }
 
