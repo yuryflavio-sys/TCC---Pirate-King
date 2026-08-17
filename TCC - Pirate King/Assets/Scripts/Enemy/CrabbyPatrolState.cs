@@ -10,17 +10,20 @@ public class CrabbyPatrolState : ICrabbyState
     public void Enter(Crabby enemy)
     {
         moveTimer = patrolTime;
-        enemy.Animator.SetInteger("State", 0);
+        
+        // Ativa a animação de corrida informando que a velocidade é maior que 0
+        if (enemy.Animator != null)
+        {
+            enemy.Animator.SetFloat("speed", 1.0f);
+        }
     }
 
     public void Execute(Crabby enemy)
     {
-        // Move o caranguejo fisicamente (a rotação do sprite já está garantida no Crabby.cs)
         enemy.Body.linearVelocity = new Vector2(direction * enemy.speed, enemy.Body.linearVelocity.y);
 
         moveTimer -= Time.deltaTime;
 
-        // Verificação limpa de limites para evitar o bug de tremedeira (flick)
         float currentX = enemy.transform.position.x;
         float startX = enemy.StartPosition.x;
 
@@ -33,7 +36,6 @@ public class CrabbyPatrolState : ICrabbyState
             direction = 1;
         }
 
-        // Vai para o ataque quando o tempo de patrulha acaba
         if (moveTimer <= 0f)
         {
             enemy.ChangeState(new CrabbyAttackState());
@@ -42,7 +44,12 @@ public class CrabbyPatrolState : ICrabbyState
 
     public void Exit(Crabby enemy)
     {
-        // Zera a velocidade ao parar para atacar
         enemy.Body.linearVelocity = Vector2.zero;
+
+        // Zera a velocidade ao sair da patrulha para ele voltar ao Idle
+        if (enemy.Animator != null)
+        {
+            enemy.Animator.SetFloat("speed", 0f);
+        }
     }
 }

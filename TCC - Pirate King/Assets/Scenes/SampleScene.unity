@@ -12257,10 +12257,11 @@ GameObject:
   - component: {fileID: 453871047}
   - component: {fileID: 453871052}
   - component: {fileID: 453871051}
+  - component: {fileID: 453871053}
   - component: {fileID: 453871050}
   m_Layer: 8
   m_Name: Crabby
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12355,7 +12356,7 @@ Transform:
   m_GameObject: {fileID: 453871046}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.73, y: -0.21, z: 0}
+  m_LocalPosition: {x: 11.895, y: -0.341, z: 0}
   m_LocalScale: {x: 4.086553, y: 5.474914, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12405,7 +12406,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.45, y: 0.25}
+  m_Size: {x: 0.45, y: 0.235}
   m_EdgeRadius: 0
 --- !u!114 &453871051
 MonoBehaviour:
@@ -12433,7 +12434,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -12448,6 +12449,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &453871053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453871046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac7f34243d10484b80906a01a73466c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
+  damageValue: 3
 --- !u!1 &466128399
 GameObject:
   m_ObjectHideFlags: 0
@@ -12629,7 +12643,7 @@ CompositeCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -15165,7 +15179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   maxHealth: 9
-  invincibilityDuration: 1
+  invincibilityDuration: 2
   knockbackForce: 5
 --- !u!1 &991025327
 GameObject:
@@ -15212,7 +15226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4774bb11bea58e47ac1749bb7caefea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwordHitbox
-  damage: 3
+  attackDamage: 3
 --- !u!61 &991025330
 BoxCollider2D:
   m_ObjectHideFlags: 0

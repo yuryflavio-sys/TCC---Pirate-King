@@ -7,6 +7,7 @@ public class Crabby : MonoBehaviour
     private SpriteRenderer sprite;
     private ICrabbyState currentState;
     private Transform player;
+    private bool isDead = false;
 
     [Header("Movement Settings")]
     public float speed = 1.0f;
@@ -16,7 +17,6 @@ public class Crabby : MonoBehaviour
     public int maxHealth = 9;
     private int currentHealth;
 
-    // Propriedades públicas para os Estados acessarem com segurança
     public Animator Animator => animator;
     public Rigidbody2D Body => body;
     public SpriteRenderer Sprite => sprite;
@@ -29,10 +29,8 @@ public class Crabby : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         startPosition = transform.position;
 
-        // Inicializa a vida do caranguejo
         currentHealth = maxHealth;
 
-        // Procura o jogador na cena automaticamente usando a Tag
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -44,14 +42,14 @@ public class Crabby : MonoBehaviour
 
     void Update()
     {
-        // LÓGICA DE MIRA: O caranguejo SEMPRE olha para o jogador
+        if (isDead) return;
+
         if (player != null)
         {
             bool isPlayerOnRight = player.position.x > transform.position.x;
             sprite.flipX = isPlayerOnRight; 
         }
 
-        // Executa o comportamento do estado atual (Idle, Patrol, Attack)
         if (currentState != null)
         {
             currentState.Execute(this);
@@ -60,14 +58,16 @@ public class Crabby : MonoBehaviour
 
     public void ChangeState(ICrabbyState newState)
     {
+        if (isDead) return;
         currentState?.Exit(this);
         currentState = newState;
         currentState.Enter(this);
     }
 
-    // Chamado pelo Player quando a espada atinge o caranguejo
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
         Debug.Log("Crabby tomou " + damage + " de dano! Vida restante: " + currentHealth);
 
@@ -75,18 +75,39 @@ public class Crabby : MonoBehaviour
         {
             Die();
         }
+        else
+        {
+            // Dispara o Trigger de Hit no Animator
+            if (animator != null)
+            {
+                animator.SetTrigger("Hit");
+            }
+        }
     }
 
     private void Die()
     {
+        isDead = true;
         Debug.Log("Crabby foi derrotado!");
-        Destroy(gameObject); // Remove o caranguejo da cena
+
+        // Dispara o Trigger de Morte no Animator
+        if (animator != null)
+        {
+            animator.SetTrigger("Dead");
+        }
+
+        // Desliga física e colisor
+        if (body != null) body.simulated = false;
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = false;
+
+        // Destrói o objeto após 2 segundos para dar tempo da animação de morte rodar
+        Destroy(gameObject, 2.0f);
     }
 
-    // Chamado pelo Animation Event no último frame da animação de ataque
     public void EndAttack()
     {
-        if (currentState is CrabbyAttackState)
+        if (currentState is CrabbyAttackState && !isDead)
         {
             ChangeState(new CrabbyIdleState());
         }

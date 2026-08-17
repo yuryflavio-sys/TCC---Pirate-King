@@ -9,8 +9,12 @@ public class CrabbyIdleState : ICrabbyState
     {
         timer = idleDuration;
         enemy.Body.linearVelocity = Vector2.zero;
-        // 0 significa estado Idle/Parado no Animator
-        enemy.Animator.SetInteger("State", 0);
+        
+        // Garante que a velocidade de movimento no animator fique zerada
+        if (enemy.Animator != null)
+        {
+            enemy.Animator.SetFloat("speed", 0f);
+        }
     }
 
     public void Execute(Crabby enemy)
