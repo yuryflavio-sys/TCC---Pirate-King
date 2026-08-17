@@ -85,8 +85,6 @@ public class PlayerHealth : MonoBehaviour
 
         if (anim != null) anim.SetTrigger("Dead");
 
-        // A MÁGICA DO PADRÃO STATE AQUI:
-        // Pega o script principal Player e joga ele no estado de morte!
         Player playerScript = GetComponent<Player>();
         if (playerScript != null)
         {

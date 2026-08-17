@@ -77,7 +77,6 @@ public class Crabby : MonoBehaviour
         }
         else
         {
-            // Dispara o Trigger de Hit no Animator
             if (animator != null)
             {
                 animator.SetTrigger("Hit");
@@ -90,18 +89,15 @@ public class Crabby : MonoBehaviour
         isDead = true;
         Debug.Log("Crabby foi derrotado!");
 
-        // Dispara o Trigger de Morte no Animator
         if (animator != null)
         {
             animator.SetTrigger("Dead");
         }
 
-        // Desliga física e colisor
         if (body != null) body.simulated = false;
         Collider2D col = GetComponent<Collider2D>();
         if (col != null) col.enabled = false;
 
-        // Destrói o objeto após 2 segundos para dar tempo da animação de morte rodar
         Destroy(gameObject, 2.0f);
     }
 

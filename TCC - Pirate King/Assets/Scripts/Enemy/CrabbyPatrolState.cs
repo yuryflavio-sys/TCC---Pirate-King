@@ -11,7 +11,6 @@ public class CrabbyPatrolState : ICrabbyState
     {
         moveTimer = patrolTime;
         
-        // Ativa a animação de corrida informando que a velocidade é maior que 0
         if (enemy.Animator != null)
         {
             enemy.Animator.SetFloat("speed", 1.0f);
@@ -46,7 +45,6 @@ public class CrabbyPatrolState : ICrabbyState
     {
         enemy.Body.linearVelocity = Vector2.zero;
 
-        // Zera a velocidade ao sair da patrulha para ele voltar ao Idle
         if (enemy.Animator != null)
         {
             enemy.Animator.SetFloat("speed", 0f);

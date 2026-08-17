@@ -15,8 +15,6 @@ public class PlayerJumpState : IPlayerState
         player.Body.linearVelocity = new Vector2(moveInput * player.speed, player.Body.linearVelocity.y);
         player.Flip(moveInput);
 
-        // Removemos o IsGrounded daqui! 
-        // Agora o script só se preocupa em mandar o jogador para a queda quando a velocidade começar a descer.
         if (player.Body.linearVelocity.y < -0.1f) 
         {
             player.Animator.SetBool("Falling", true);

@@ -17,22 +17,16 @@ public class BigMap : MonoBehaviour
         {
             isCollected = true;
 
-            // Dispara a animação de fechar (Folding) e sumir (Out)
             anim.SetTrigger("BigColect");
 
-            // Inicia a contagem de tempo antes de congelar (ex: espera 1.5 segundos)
-            // Ajuste esse valor para o tempo exato que suas animações demoram para terminar
             StartCoroutine(FreezeGameRoutine(1.5f)); 
         }
     }
 
-    // Coroutine: Uma função especial que pode "esperar" antes de continuar
     private IEnumerator FreezeGameRoutine(float delayTime)
     {
-        // O código pausa nesta linha e espera os segundos definidos
         yield return new WaitForSeconds(delayTime);
 
-        // Após o tempo acabar, o jogo é congelado
         Time.timeScale = 0f;
         
         Debug.Log("Level Complete! Game frozen.");

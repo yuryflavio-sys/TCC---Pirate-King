@@ -6,7 +6,6 @@ public class CrabbyAttackState : ICrabbyState
     {
         enemy.Body.linearVelocity = Vector2.zero;
         
-        // Dispara o Trigger de ataque no Animator para acionar a Antecipação/Ataque
         if (enemy.Animator != null)
         {
             enemy.Animator.SetTrigger("Attack");

@@ -10,7 +10,6 @@ public class CrabbyIdleState : ICrabbyState
         timer = idleDuration;
         enemy.Body.linearVelocity = Vector2.zero;
         
-        // Garante que a velocidade de movimento no animator fique zerada
         if (enemy.Animator != null)
         {
             enemy.Animator.SetFloat("speed", 0f);

@@ -8,12 +8,11 @@ public class PlayerMoveState : IPlayerState
 
     public void Execute(Player player)
     {
-        // NOVO: Detecta se ele andou para fora da beirada da plataforma
         if (!player.IsGrounded() && player.Body.linearVelocity.y < -0.1f)
         {
             player.Animator.SetBool("Falling", true);
             player.ChangeState(new PlayerFallState());
-            return; // Sai do método para parar de tocar a animação de correr
+            return;
         }
 
         float moveInput = Input.GetAxis("Horizontal");
